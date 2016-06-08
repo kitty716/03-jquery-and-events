@@ -7,7 +7,7 @@ articleView.populateFilters = function() {
     var optionTag = '<option value"' + val + '">' + val + '</option>';
     $('#author-filter').append(optionTag);
 
-    val = $(this).attr('date-category');
+    val = $(this).attr('data-category');
     optionTag = '<option value="' + val + '">' + val + '</option>';
     if ($('#category-filter option[value="' + val + '"]').length === 0) {
       $('#category-filter').append(optionTag);
@@ -16,7 +16,7 @@ articleView.populateFilters = function() {
   });
 };
 
-article.handleAuthorFilter = function() {
+articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     	if($(this).val()) {
 		/* TODO: If the select box changes to an option that has a value, we should:
@@ -35,7 +35,7 @@ article.handleAuthorFilter = function() {
   });
 };
 
-articles.handleCategoryFilter = function() {
+articleView.handleCategoryFilter = function() {
 	/* TODO: Just like we do for #author-filter above, we should handle change events on the #category-filter element. Be sure to reset the #author-filter while you are at it! */
   $('#category-filter').on('change', function() {
     if ($(this).val()){
@@ -58,7 +58,7 @@ articleView.handleMainNav = function() {
   $('.main-nav').on('click', '.tab', function(){
     $('.tab-content').hide();
     var val = $(this).attr('data-content');
-    $('#' + val).fadeIn('fast'); 
+    $('#' + val).fadeIn('fast');
   });
 
   $('.main-nav .tab:first').click();
@@ -67,13 +67,33 @@ articleView.handleMainNav = function() {
 articleView.setTeasers = function() {
 	/* NOTE: this hides any elements after the first 2 (<p> tags in this case) in any article body: */
   $('.article-body *:nth-of-type(n+2)').hide();
+
+  $('#articles').on('click', '.read-on', function() {
+    console.log(this);
+    event.preventDefault();
+    $('.article-body *:nth-of-type(n+2)').fadeIn('fast');
+    $(this).text('Show less');
+    $(this).attr('class', 'show-less');
+    $(this).removeClass('.read-on');
+  });
 	/* TODO: Add a delegated event handler to reveal the remaining body section. When a .read-on link is clicked, we can:
 		1. Prevent the default action of a link.
 		2. Reveal everything in that particular article now.
 		3. Hide the read-on link! (Might need event delegation here) */
 
 	// STRETCH GOAL!: change the 'Read More' link to 'Show Less'
-
+  $('#articles').on('click', '.show-less', function() {
+    event.preventDefault();
+    $('.article-body *:nth-of-type(n+2)').hide();
+    $(this).text('Read on');
+    $(this).attr('class', 'read-on');
+    $(this).removeClass('.show-less');
+  });
 };
 
 //TODO: Invoke all of the above functions (I, mean, methods!);
+articleView.populateFilters();
+articleView.handleAuthorFilter();
+articleView.handleCategoryFilter();
+articleView.handleMainNav();
+articleView.setTeasers();
