@@ -31,7 +31,20 @@
     </header>
     <main>
       <section id="articles" class="tab-content">
-        
+        <div>
+          <ul id="filters">
+            <li>
+            <select id="author-filter">
+              <option value="">--Filter by Authors --</option>
+            </select>
+            </li>
+            <li>
+              <select id="category-filter">
+                <option value="">-- Filter by Categories --</option>
+              </select>
+            </li>
+          </ul>
+        </div>
         <article class="template" data-category="cat">
           <header>
             <h1>Title</h1>
@@ -64,6 +77,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="scripts/blogArticles.js"></script>
     <script src="scripts/article.js"></script>
+    <script src="scripts/articleView.js"></script>
     <!-- TODO: Link up our new js file! -->
   </body>
 </html>
