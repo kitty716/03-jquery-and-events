@@ -69,7 +69,6 @@ articleView.setTeasers = function() {
   $('.article-body *:nth-of-type(n+2)').hide();
 
   $('#articles').on('click', '.read-on', function() {
-    console.log(this);
     event.preventDefault();
     $('.article-body *:nth-of-type(n+2)').fadeIn('fast');
     $(this).text('Show less');
@@ -92,8 +91,10 @@ articleView.setTeasers = function() {
 };
 
 //TODO: Invoke all of the above functions (I, mean, methods!);
-articleView.populateFilters();
-articleView.handleAuthorFilter();
-articleView.handleCategoryFilter();
-articleView.handleMainNav();
-articleView.setTeasers();
+$(document).ready(function() {
+  articleView.populateFilters();
+  articleView.handleAuthorFilter();
+  articleView.handleCategoryFilter();
+  articleView.handleMainNav();
+  articleView.setTeasers();
+});
